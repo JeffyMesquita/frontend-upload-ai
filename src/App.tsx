@@ -1,7 +1,15 @@
-import { FileVideo, Github } from "lucide-react";
+import { FileVideo, Github, Upload, Wand2 } from "lucide-react";
 import { Button } from "./components/ui/button";
 import { Label } from "./components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./components/ui/select";
 import { Separator } from "./components/ui/separator";
+import { Slider } from "./components/ui/slider";
 import { Textarea } from "./components/ui/textarea";
 
 export function App() {
@@ -65,16 +73,73 @@ export function App() {
 
             <Separator />
 
-            <div className="spacey-y-1">
+            <div className="spacey-y-2">
               <Label htmlFor="transcription_prompt">
                 Prompt de transcrição
               </Label>
               <Textarea
                 id="transcription_prompt"
-                className="h-32 leading-relaxed p-4"
+                className="h-28 leading-relaxed p-4 resize-none"
                 placeholder="Inclua palavras-chave mencionadas no vídeo separadas por vírgula (ex: 'cachorro, gato, animal')"
               />
             </div>
+
+            <Button type="submit" className="w-full">
+              Carregar video
+              <Upload className="w-4 h-4 ml-2" />
+            </Button>
+          </form>
+
+          <Separator />
+
+          <form className="space-y-6">
+            <div className="space-y-2">
+              <Label>Prompt</Label>
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Selecione um prompt..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="title">Título do YouTube</SelectItem>
+                  <SelectItem value="description">
+                    Descrição do YouTube
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label>Modelo</Label>
+              <Select defaultValue="gpt3.5" disabled>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="gpt3.5">GPT 3.5-turbo 16k</SelectItem>
+                </SelectContent>
+              </Select>
+              <span className="block text-xs text-muted-foreground italic">
+                Você poderá customizar essa opção em breve
+              </span>
+            </div>
+
+            <Separator />
+
+            <div className="space-y-4">
+              <Label>Modelo</Label>
+              <Slider min={0} max={1} step={0.1} />
+              <span className="block text-xs text-muted-foreground italic leading-relaxed">
+                Valores mais altos tendem a deixa o resultado mais criativo e
+                com possíveis erros
+              </span>
+            </div>
+
+            <Separator />
+
+            <Button type="submit" className="w-full">
+              Executar
+              <Wand2 className="w-4 h-4 ml-2" />
+            </Button>
           </form>
         </aside>
       </main>
