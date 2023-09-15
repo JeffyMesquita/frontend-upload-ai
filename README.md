@@ -11,3 +11,9 @@ pnpm i @ffmpeg/ffmpeg @ffmpeg/util
 ```bash
 pnpm i axios
 ```
+
+## 1.3 Install ai
+
+```bash
+pnpm i ai
+```
